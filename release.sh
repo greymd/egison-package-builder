@@ -4,9 +4,8 @@
 # Automated build script for Egison
 # Required Environment Variables:
 #  * TRAVIS_BUILD_DIR -- Given by TravisCI
-#  * ID_RSA           -- Given by TravisCI's settings screen
-#                        FYI: https://travis-ci.org/egison/<reponame>/settings
-#  * GITHUB_AUTH      -- Given by TravisCI's settings screen.
+#  * ID_RSA           -- Given by GitHub secrets.
+#  * API_AUTH         -- Given by GitHub secrets.
 #                        Auth token for GitHub Rest API.
 # ===================================
 set -xue
@@ -18,7 +17,7 @@ CURRENT_VERSION=
 RELEASE_ARCHIVE=
 readonly TARGET_BRANCH="master"
 ## User-Agent starts with Travis is required (https://github.com/travis-ci/travis-ci/issues/5649)
-readonly COMMON_HEADER=("--retry" "5" "-H" "User-Agent: Travis/1.0" "-H" "Authorization: token $GITHUB_AUTH" "-H" "Accept: application/vnd.github.v3+json" "-L" "-f")
+readonly COMMON_HEADER=("--retry" "5" "-H" "User-Agent: Travis/1.0" "-H" "Authorization: token $API_AUTH" "-H" "Accept: application/vnd.github.v3+json" "-L" "-f")
 
 # Initialize SSH keys
 init_ssh () {

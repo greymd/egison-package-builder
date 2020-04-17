@@ -81,7 +81,7 @@ get_latest_release_cabal () {
   local _repo="$1"
   echo "get_latest_release_cabal start $_repo" >&2
   curl --retry 3 -f -v -H "User-Agent: Travis/1.0" \
-       -H "Authorization: token $GITHUB_AUTH" \
+       -H "Authorization: token $API_AUTH" \
        -L "https://raw.githubusercontent.com/${_repo}/master/${_repo/*\/}.cabal" \
        | awk '/Version:/{print $NF}' > ./latest
   _ret=$?
@@ -98,7 +98,7 @@ get_latest_release_file () {
   local _file="$1"
   echo "get_latest_release_file start $_repo" >&2
   curl --retry 3 -f -v -H "User-Agent: Travis/1.0" \
-       -H "Authorization: token $GITHUB_AUTH" \
+       -H "Authorization: token $API_AUTH" \
        -L "https://raw.githubusercontent.com/${_repo}/master/${_file}" \
        | awk -F- '{print $1}' > ./latest
   _ret=$?

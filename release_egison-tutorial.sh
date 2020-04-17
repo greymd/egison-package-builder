@@ -189,6 +189,7 @@ bump_version () {
   local _release_id
   local _repo_name=${_package_builder_repo##*/}
 
+  rm -rf "${THIS_DIR:?}/${_repo_name}"
   git clone -b "${TARGET_BRANCH}" \
     "git@github.com:${_package_builder_repo}.git" \
     "${THIS_DIR}/${_repo_name}"
@@ -212,6 +213,7 @@ commit_package () {
   local _release_id
   local _repo_name=${_package_builder_repo##*/}
 
+  rm -rf "${THIS_DIR:?}/${_repo_name}"
   git clone -b "${TARGET_BRANCH}" \
     "git@github.com:${_package_builder_repo}.git" \
     "${THIS_DIR}/${_repo_name}"

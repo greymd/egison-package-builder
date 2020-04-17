@@ -34,7 +34,7 @@ jobs:
         docker pull greymd/tar2deb:latest
         docker pull greymd/tar2rpm:latest
 
-    - name: Deploy
+    - name: Deploy egison
       env:
         ID_RSA: ${{secrets.ID_RSA}}
         API_AUTH: ${{secrets.API_AUTH}}
@@ -47,3 +47,17 @@ jobs:
         bash -x release.sh upload-deb "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
         bash -x release.sh commit-rpm "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
         bash -x release.sh commit-deb "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+
+    - name: Deploy egison-tutorial
+      env:
+        ID_RSA: ${{secrets.ID_RSA}}
+        API_AUTH: ${{secrets.API_AUTH}}
+        TARGET: egison/egison-tutorial
+      run: |
+        bash -x release_egison-tutorial.sh init
+        bash -x release_egison-tutorial.sh upload-tarball "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+        bash -x release_egison-tutorial.sh upload-rpm "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+        bash -x release_egison-tutorial.sh upload-deb "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+        bash -x release_egison-tutorial.sh commit-rpm "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+        bash -x release_egison-tutorial.sh commit-deb "$GITHUB_REPOSITORY" "$TARGET" "$GITHUB_REPOSITORY"
+        bash -x release_egison-tutorial.sh bump "$GITHUB_REPOSITORY" "$TARGET" # egison-tutorial bumped finally

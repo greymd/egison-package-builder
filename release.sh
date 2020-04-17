@@ -21,6 +21,7 @@ readonly COMMON_HEADER=("--retry" "5" "-H" "User-Agent: Travis/1.0" "-H" "Author
 
 # Initialize SSH keys
 init_ssh () {
+  mkdir -p "$HOME/.ssh/"
   printf "Host github.com\\n\\tStrictHostKeyChecking no\\n" >> "$HOME/.ssh/config"
   echo "${ID_RSA}" | base64 --decode | gzip -d > "$HOME/.ssh/id_rsa"
   chmod 600 "$HOME/.ssh/id_rsa"

@@ -26,6 +26,17 @@ readonly GCC_OPT='-optl-static'
   git clone -b "${VERSION}" https://github.com/egison/egison.git
   cp -rf egison/lib ./lib/egison-tutorial/lib
 
+  echo "name : egison-tutorial
+cmdname : egison-tutorial
+summary : A tutorial program for the Egison programming language
+description : A tutorial program for the Egison programming language
+version : ${VERSION}
+changelog : Support Egison ${VERSION}
+url : https://www.egison.org/
+author : Satoshi, Egi
+email : <egison@egison.org>
+libdir : /usr/lib" > .tar2package.yml
+
   tar zcvf "$TARBALL_FILE" -C "$PWD" bin lib .tar2package.yml
 } >&2
 cat "$PWD/$TARBALL_FILE"
